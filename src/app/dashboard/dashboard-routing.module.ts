@@ -10,7 +10,8 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'machines'
+        redirectTo: 'machines',
+        pathMatch: 'full'
       },
       {
         path: 'machines',
@@ -18,10 +19,12 @@ export const routes: Routes = [
       }
     ]
   },
+  /*
   {
     path: '**',
     redirectTo: ''
   }
+  */
 ];
 
 @NgModule({

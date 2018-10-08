@@ -1,3 +1,31 @@
-<p>
-  sign-in works!
-</p>
+<div class="w-100 h-100 d-flex justify-content-center align-items-center">
+  <mat-card id="sign-in">
+    <div mat-card-title>Авторизация</div>
+    <div>
+      <form [formGroup]="signInForm">
+        <!-- START: Учетная запись -->
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Учетная запись</mat-label>
+          <input matInput placeholder="Введите учетную запись" formControlName="account" required>
+          <mat-error>Вы не ввели учетную запись</mat-error>
+        </mat-form-field>
+        <!-- END: Учетная запись -->
+
+        <!-- START: Пароль -->
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Пароль</mat-label>
+          <input matInput placeholder="Введите пароль" formControlName="password" required>
+          <mat-error>Вы не ввели пароль</mat-error>
+        </mat-form-field>
+        <!-- END: Пароль -->
+
+          <button mat-flat-button class="w-100" [disabled]="signInForm.invalid">
+            <div class="d-flex justify-content-center align-items-center">
+              <mat-progress-spinner diameter="20" class="mr-2"></mat-progress-spinner>Войти
+            </div>
+          </button>
+      </form>
+
+    </div>
+  </mat-card>
+</div>

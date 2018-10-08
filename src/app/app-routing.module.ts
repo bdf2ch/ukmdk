@@ -6,11 +6,11 @@ import { AuthenticationModule } from './authentication/authentication.module';
 export const routes: Routes = [
   {
     path: '',
-    loadChildren: () => DashboardModule
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
   {
     path: 'signin',
-    loadChildren: () => AuthenticationModule
+    loadChildren: './authentication/authentication.module#AuthenticationModule'
   },
   {
     path: '**',

@@ -10,6 +10,9 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
     SharedModule,
     AuthenticationRoutingModule
   ],
-  declarations: [SignInComponent, AuthenticationComponent]
+  declarations: [
+    AuthenticationComponent,
+    SignInComponent,
+  ]
 })
 export class AuthenticationModule { }
