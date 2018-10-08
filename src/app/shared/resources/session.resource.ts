@@ -25,7 +25,7 @@ export class SessionResource extends Resource {
     method: ResourceRequestMethod.Get,
     withCredentials: true
   })
-  signIn: IResourceMethod<void, IUser | null>;
+  signIn: IResourceMethod<{action: string, account: string, password: string}, IUser | null>;
 
   /**
    * Path: /
@@ -37,6 +37,6 @@ export class SessionResource extends Resource {
     method: ResourceRequestMethod.Get,
     withCredentials: true
   })
-  signOut: IResourceMethod<void, void>;
+  signOut: IResourceMethod<{action: string}, void>;
 }
 

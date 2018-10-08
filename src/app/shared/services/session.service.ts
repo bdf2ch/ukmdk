@@ -29,10 +29,11 @@ export class SessionService {
    */
   signIn(login: string, password: string): Observable<User | null> {
     this.authorizationInProgress.next(true);
-    return from(this.resource.signIn())
+    return from(this.resource.signIn({action: 'signIn', account: login, password: password}))
       .pipe(
         map((user: IUser | null) => {
-          this.user.next(user ? new User(user) : null);
+          console.log('result', user);
+          this.user.next(JSON.parse(String(user)) ? new User(user) : null);
           return this.user.value;
         }),
         finalize(() => {
@@ -46,7 +47,7 @@ export class SessionService {
    */
   signOut(): Observable<void> {
     this.authorizationInProgress.next(true);
-    return from(this.resource.signOut())
+    return from(this.resource.signOut({action: 'signOut'}))
       .pipe(
         map(() => {
           this.user.next(null);
@@ -62,5 +63,9 @@ export class SessionService {
    */
   getUser(): Observable<User | null> {
     return this.user.asObservable();
+  }
+
+  isAuthorizationInProgress(): Observable<boolean> {
+    return this.authorizationInProgress.asObservable();
   }
 }

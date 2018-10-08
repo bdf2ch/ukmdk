@@ -19,11 +19,14 @@
         </mat-form-field>
         <!-- END: Пароль -->
 
-          <button mat-flat-button class="w-100" [disabled]="signInForm.invalid">
-            <div class="d-flex justify-content-center align-items-center">
-              <mat-progress-spinner diameter="20" class="mr-2"></mat-progress-spinner>Войти
-            </div>
-          </button>
+        <button mat-flat-button class="w-100" [disabled]="signInForm.invalid || (session.isAuthorizationInProgress() | async) === true" (click)="signIn()">
+          <div class="d-flex justify-content-center align-items-center"
+               *ngIf="session.isAuthorizationInProgress() | async">
+            <mat-spinner diameter="20" class="mr-3"></mat-spinner>
+            Загрузка
+          </div>
+          <div class="text-center" *ngIf="!(session.isAuthorizationInProgress() | async)">Войти</div>
+        </button>
       </form>
 
     </div>

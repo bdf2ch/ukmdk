@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'concrete/php/api.php'
+  apiUrl: 'http://concrete/php/api.php'
 };
 
 /*
