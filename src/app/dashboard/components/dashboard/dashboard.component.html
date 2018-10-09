@@ -1,9 +1,18 @@
 <mat-toolbar color="primary">
-  <div class="row">
-    <div class="col">
-      <span>УК "МДК" &mdash; Панель управления</span>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-auto">
+        <span>УК "МДК" &mdash; Панель управления</span>
+      </div>
+      <div class="col d-flex justify-content-end" *ngIf="session.getUser() | async as user">
+        <button mat-stroked-button color="accent" [matMenuTriggerFor]="userMenu">
+           {{ user?.firstName + ' ' + user?.lastName }}
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item>Выход</button>
+        </mat-menu>
+      </div>
     </div>
-    <div class="col"></div>
   </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
