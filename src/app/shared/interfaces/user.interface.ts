@@ -6,6 +6,6 @@ export interface IUser {
   first_name: string;         // Имя пользователя
   last_name: string;          // Фамилия пользователя
   login: string;              // Учетная запись
-  password: string;           // Пароль
+  passwd: string;           // Пароль
   is_enabled: number;         // Доступность
 }

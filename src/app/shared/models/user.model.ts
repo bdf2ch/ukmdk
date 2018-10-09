@@ -20,7 +20,7 @@ export class User {
     this.firstName = config ? config.first_name : null;
     this.lastName = config ? config.last_name : null;
     this.login = config ? config.login : null;
-    this.password = config ? config.password : null;
+    this.password = config ? config.passwd : null;
     this.isEnabled = config ? Boolean(config.is_enabled) : true;
   }
 }
