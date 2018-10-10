@@ -12,4 +12,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * Завершение сессии пользователя
+   */
+  signOut() {
+    this.session.signOut();
+  }
 }

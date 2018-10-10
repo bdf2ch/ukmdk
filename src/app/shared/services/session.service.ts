@@ -45,17 +45,9 @@ export class SessionService {
   /**
    * Завршение сессии пользователя
    */
-  signOut(): Observable<void> {
+  signOut(): void {
     this.authorizationInProgress.next(true);
-    return from(this.resource.signOut({action: 'signOut'}))
-      .pipe(
-        map(() => {
-          this.user.next(null);
-        }),
-        finalize(() => {
-          this.authorizationInProgress.next(false);
-        })
-      );
+    this.user.next(null);
   }
 
   /**

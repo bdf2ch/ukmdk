@@ -9,7 +9,7 @@
            {{ user?.firstName + ' ' + user?.lastName }}
         </button>
         <mat-menu #userMenu="matMenu">
-          <button mat-menu-item>Выход</button>
+          <button mat-menu-item (click)="signOut()">Выход</button>
         </mat-menu>
       </div>
     </div>
