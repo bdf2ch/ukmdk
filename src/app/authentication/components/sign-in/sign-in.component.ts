@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SessionService } from '../../../shared/services/session.service';
 import { MatSnackBar } from '@angular/material';
 import { User } from '../../../shared/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,7 +15,8 @@ export class SignInComponent implements OnInit {
   public password: string;
   public signInForm: FormGroup;
 
-  constructor(private readonly snackBar: MatSnackBar,
+  constructor(private readonly router: Router,
+              private readonly snackBar: MatSnackBar,
               public readonly session: SessionService) {
     this.account = null;
     this.password = null;
@@ -34,6 +36,8 @@ export class SignInComponent implements OnInit {
           this.snackBar.open('Пользователь не найден', 'Закрыть', {
             duration: 2000,
           });
+        } else {
+          this.router.navigate(['/machines']);
         }
       });
   }
