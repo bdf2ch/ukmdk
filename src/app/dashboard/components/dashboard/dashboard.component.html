@@ -4,7 +4,22 @@
       <div class="col-auto">
         <span>УК "МДК" &mdash; Панель управления</span>
       </div>
-      <div class="col d-flex justify-content-end" *ngIf="session.getUser() | async as user">
+      <div class="col d-flex justify-content-center">
+        <button mat-flat-button class="mr-3" routerLink="/">
+          <div class="d-flex justify-content-center align-items-center">
+            <mat-icon class="mr-2">directions_car</mat-icon>
+            Спецтехника
+          </div>
+        </button>
+
+        <button mat-flat-button routerLink="/feedback">
+          <div class="d-flex justify-content-center align-items-center">
+            <mat-icon class="mr-2">message</mat-icon>
+            Обратная связь
+          </div>
+        </button>
+      </div>
+      <div class="col-auto d-flex justify-content-end" *ngIf="session.getUser() as user">
         <button mat-stroked-button color="accent" [matMenuTriggerFor]="userMenu">
            {{ user?.firstName + ' ' + user?.lastName }}
         </button>
@@ -15,4 +30,4 @@
     </div>
   </div>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<router-outlet style="marrgin-top: -64px;"></router-outlet>

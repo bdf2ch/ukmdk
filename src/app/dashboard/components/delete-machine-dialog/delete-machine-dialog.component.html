@@ -1,0 +1,16 @@
+<h5>Удаление спецтранспорта</h5>
+<div class="container-fluid">
+  <div class="row mb-2">
+    <div class="col-12 text-center">
+      Удалить {{data.machine.title}}?
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <button mat-flat-button color="primary" class="w-100" (click)="deleteMachine()" [disabled]="machines.deletingInProgress() | async">Удалить</button>
+    </div>
+    <div class="col-6">
+      <button mat-flat-button color="warn" class="w-100" (click)="cancel()" [disabled]="machines.deletingInProgress() | async">Отмена</button>
+    </div>
+  </div>
+</div>

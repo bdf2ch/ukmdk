@@ -18,7 +18,15 @@ export class SessionService {
 
   constructor(private readonly http: HttpClient,
               private readonly resource: SessionResource) {
-    this.user = new BehaviorSubject<User | null>(null);
+    const user = new User({
+      id: 1,
+      first_name: 'Ivan',
+      last_name: 'Smith',
+      login: 'bdf2ch',
+      passwd: 'zx12!@#$',
+      is_enabled: 1
+    });
+    this.user = new BehaviorSubject<User | null>(user);
     this.authorizationInProgress = new BehaviorSubject<boolean>(false);
   }
 
@@ -53,8 +61,8 @@ export class SessionService {
   /**
    * Возвращает текущего пользователя
    */
-  getUser(): Observable<User | null> {
-    return this.user.asObservable();
+  getUser(): User | null {
+    return this.user.getValue();
   }
 
   isAuthorizationInProgress(): Observable<boolean> {

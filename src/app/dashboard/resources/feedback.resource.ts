@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { ResourceParams, ResourceHandler, ResourceAction, ResourceRequestMethod, IResourceMethod, Resource } from '@ngx-resource/core';
-import { IMachine } from '../interfaces/machine.interface';
+import { IFeedback } from '../interfaces/feedback.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { IMachine } from '../interfaces/machine.interface';
 @ResourceParams({
   pathPrefix: environment.apiUrl
 })
-export class MachinesResource extends Resource {
+export class FeedbackResource extends Resource {
 
   constructor(handler: ResourceHandler) {
     super(handler);
@@ -18,25 +18,13 @@ export class MachinesResource extends Resource {
   /**
    * Path: /
    * Method: GET
-   * Получение списка спецтранспорта
+   * Авторизация пользователя
    */
   @ResourceAction({
     path: '/',
     method: ResourceRequestMethod.Get,
     withCredentials: true
   })
-  getList: IResourceMethod<{action: string}, IMachine[]>;
-
-  /**
-   * Path: /
-   * Method: GET
-   * Удаление спецтранспорта
-   */
-  @ResourceAction({
-    path: '/',
-    method: ResourceRequestMethod.Get,
-    withCredentials: true
-  })
-  deleteMachine: IResourceMethod<{action: string, id: number}, void>;
+  getList: IResourceMethod<{action: string}, IFeedback[]>;
 }
 

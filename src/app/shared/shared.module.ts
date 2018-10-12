@@ -13,6 +13,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -30,7 +33,10 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   declarations: [],
   exports: [
@@ -48,7 +54,10 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule,
+    MatIconModule,
+    MatTooltipModule
   ]
 })
 export class SharedModule { }

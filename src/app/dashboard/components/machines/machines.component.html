@@ -1,3 +1,32 @@
-<p>
-  machines works!
-</p>
+<div class="container-fluid d-flex p-3">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-3  mb-3" *ngFor="let machine of machines.getList() | async">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title><h4>{{machine.title}}</h4></mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+        <mat-card-content>
+          <p>
+            {{ machine.description }}
+          </p>
+          <div><strong>Стоимость:</strong>&nbsp; {{machine.cost}}</div>
+          <div><strong>Аренда:</strong>&nbsp; {{ machine.rent }}</div>
+        </mat-card-content>
+        <mat-card-actions class="d-flex justify-content-end">
+          <button mat-icon-button class="mr-2" color="primary" matTooltip="Редактировать" matTooltipPosition="above">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="Удалить" matTooltipPosition="above" (click)="openDeletemachineDialog(machine)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+
+<button mat-fab color="accent" id="add-machine-button" matTooltip="Добавить спецтранспорт" matTooltipPosition="left" (click)="openNewMachineDialog()">
+  <mat-icon>add</mat-icon>
+</button>
