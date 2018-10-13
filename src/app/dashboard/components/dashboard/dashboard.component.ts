@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../../../shared/services/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,8 @@ import { SessionService } from '../../../shared/services/session.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public readonly session: SessionService) { }
+  constructor(private readonly router: Router,
+              public readonly session: SessionService) { }
 
   ngOnInit() {}
 
@@ -17,5 +19,6 @@ export class DashboardComponent implements OnInit {
    */
   signOut() {
     this.session.signOut();
+    this.router.navigate(['/signin']);
   }
 }

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, from, Observable } from 'rxjs';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
 import { IUser } from '../interfaces/user.interface';
 import { SessionResource } from '../resources/session.resource';
-import { finalize, map } from 'rxjs/operators';
+import { catchError, finalize, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
 
@@ -39,9 +39,9 @@ export class SessionService {
     this.authorizationInProgress.next(true);
     return from(this.resource.signIn({action: 'signIn', account: login, password: password}))
       .pipe(
-        map((user: IUser | null) => {
-          console.log('result', user);
-          this.user.next(JSON.parse(String(user)) ? new User(user) : null);
+        map((result: IUser | string) => {
+          console.log('result', result);
+          this.user.next(result !== 'null' ? new User(result) : null);
           return this.user.value;
         }),
         finalize(() => {
