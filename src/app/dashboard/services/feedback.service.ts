@@ -4,6 +4,7 @@ import { catchError, finalize, map } from 'rxjs/operators';
 import { Feedback } from '../models/feedback.model';
 import { FeedbackResource } from '../resources/feedback.resource';
 import { IFeedback } from '../interfaces/feedback.interface';
+import { Machine } from '../models/machine.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,10 +53,9 @@ export class FeedbackService {
 
   fetchList(): Observable<Feedback[]> {
     this.fetchingMessagesInProgress.next(true);
-    return from(this.resource.getList({action: 'getFeedbackList'}))
+    return from(this.resource.getList({action: 'getFeedbackMessages'}))
       .pipe(
         map((result: IFeedback[]) => {
-          console.log('result', result);
           const messages: Feedback[] = [];
           result.forEach((item: IFeedback) => {
             messages.push(new Feedback(item));
@@ -63,14 +63,22 @@ export class FeedbackService {
           this.messages.next(messages);
           return this.messages.value;
         }),
-        /*
         catchError(() => {
           this.fetchingMessagesInProgress.next(false);
           return of([]);
         }),
-        */
         finalize(() => {
           this.fetchingMessagesInProgress.next(false);
+        })
+      );
+  }
+
+  deleteMessage(message: Feedback): Observable<boolean> {
+    this.deletingMessageInProgress.next(true);
+    return from(this.resource.deleteMessage({action: 'deleteMessage', id: message.id}))
+      .pipe(
+        finalize(() => {
+          this.deletingMessageInProgress.next(false);
         })
       );
   }
@@ -81,5 +89,9 @@ export class FeedbackService {
 
   fetchingInProgress(): Observable<boolean> {
     return this.fetchingMessagesInProgress.asObservable();
+  }
+
+  deletingInProgress(): Observable<boolean> {
+    return this.deletingMessageInProgress.asObservable();
   }
 }

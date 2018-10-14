@@ -1,0 +1,37 @@
+<h4 class="ьи-3">Редактирование спецтранспорта</h4>
+<form [formGroup]="editMachineForm">
+  <mat-form-field appearance="standard" class="w-100">
+    <mat-label>Наименование</mat-label>
+    <input matInput placeholder="Введите наименование" formControlName="title" required>
+    <mat-error>Вы не указали наименование спецтехники</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Описание</mat-label>
+    <textarea matInput placeholder="Введите описание" formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard" class="w-100">
+    <mat-label>Стоимость</mat-label>
+    <input matInput placeholder="Введите стоимость" formControlName="cost" required>
+    <mat-error>Вы не указали стоимость спецтехники</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard" class="w-100">
+    <mat-label>Стоимость аренды</mat-label>
+    <input matInput placeholder="Введите стоимость аренды" formControlName="rent" required>
+    <mat-error>Вы не указали стоимость аренды спецтехники</mat-error>
+  </mat-form-field>
+
+    <mat-slide-toggle formControlName="is_enabled">Отображать</mat-slide-toggle>
+</form>
+
+<div class="d-flex mt-3">
+  <div class="w-50 p-1">
+    <button mat-flat-button color="primary" class="w-100" [disabled]="editMachineForm.invalid || editMachineForm.pristine || (machines.editingInProgress() | async)" (click)="editMachine()">Сохранить</button>
+  </div>
+  <div class="w-50 p-1">
+    <button mat-flat-button color="warn" class="w-100" (click)="cancel()">Отмена</button>
+  </div>
+</div>
+

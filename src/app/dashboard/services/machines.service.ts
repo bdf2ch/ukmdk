@@ -16,6 +16,7 @@ export class MachinesService {
   private addingMachineInProgress: BehaviorSubject<boolean>;
   private editingMachineInProgress: BehaviorSubject<boolean>;
   private deletingMachineInProgress: BehaviorSubject<boolean>;
+  private uploadingPhotoInProgress: BehaviorSubject<boolean>;
 
   constructor(private readonly http: HttpClient,
               private readonly resource: MachinesResource) {
@@ -79,6 +80,7 @@ export class MachinesService {
     this.addingMachineInProgress = new BehaviorSubject(false);
     this.editingMachineInProgress = new BehaviorSubject(false);
     this.deletingMachineInProgress = new BehaviorSubject(false);
+    this.uploadingPhotoInProgress = new BehaviorSubject(false);
   }
 
   fetchList(): Observable<Machine[]> {
@@ -92,6 +94,7 @@ export class MachinesService {
             machines.push(new Machine(item));
           });
           this.machines.next(machines);
+          console.log(this.machines.value);
           return this.machines.value;
         }),
         finalize(() => {
@@ -101,7 +104,9 @@ export class MachinesService {
   }
 
   addMachine(machine: Machine, photo: File): Observable<Machine> {
+    console.log(machine);
     const formData: FormData = new FormData();
+    formData.append('action', 'addMachine');
     formData.append('title', machine.title);
     formData.append('description', machine.description);
     formData.append('cost', machine.cost);
@@ -120,12 +125,43 @@ export class MachinesService {
       );
   }
 
+  editMachine(machine: Machine): Observable<Machine> {
+    this.editingMachineInProgress.next(true);
+    return from(this.resource.editMachine({action: 'editMachine', id: machine.id, title: machine.title, description: machine.description, cost: machine.cost, rent: machine.rent, is_enabled: machine.isEnabled ? 1 : 0}))
+      .pipe(
+        map((item: IMachine) => {
+          return new Machine(item);
+        }),
+        finalize(() => {
+          this.editingMachineInProgress.next(false);
+        })
+      );
+  }
+
   deleteMachine(machine: Machine): Observable<void> {
     this.deletingMachineInProgress.next(true);
     return from(this.resource.deleteMachine({action: 'deleteMachine', id: machine.id}))
       .pipe(
         finalize(() => {
           this.deletingMachineInProgress.next(false);
+        })
+      );
+  }
+
+  uploadPhoto(id: number, photo: File): Observable<string> {
+    const formData: FormData = new FormData();
+    formData.append('action', 'uploadMachinePhoto');
+    formData.append('id', String(id));
+    formData.append('photo', photo);
+
+    this.uploadingPhotoInProgress.next(true);
+    return this.http.post(environment.apiUrl, formData)
+      .pipe(
+        map((url: string) => {
+          return url;
+        }),
+        finalize(() => {
+          this.uploadingPhotoInProgress.next(false);
         })
       );
   }
@@ -141,5 +177,12 @@ export class MachinesService {
   deletingInProgress(): Observable<boolean> {
     return this.deletingMachineInProgress.asObservable();
   }
-}
 
+  editingInProgress(): Observable<boolean> {
+    return this.editingMachineInProgress.asObservable();
+  }
+
+  uploadingInProgress(): Observable<boolean> {
+    return this.uploadingPhotoInProgress.asObservable();
+  }
+}

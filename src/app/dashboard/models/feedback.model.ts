@@ -19,6 +19,6 @@ export class Feedback {
     this.name = config ? config.name : null;
     this.email = config ? config.email : null;
     this.message = config ? config.message : null;
-    this.dateCreated = config ? new Date(config.date_created) : null;
+    this.dateCreated = config ? new Date(Number(config.date_created)) : null;
   }
 }

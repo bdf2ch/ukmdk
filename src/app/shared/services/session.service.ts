@@ -41,7 +41,7 @@ export class SessionService {
       .pipe(
         map((result: IUser | string) => {
           console.log('result', result);
-          this.user.next(result !== 'null' ? new User(result) : null);
+          this.user.next(result !== 'null' ? new User(result as IUser) : null);
           return this.user.value;
         }),
         finalize(() => {

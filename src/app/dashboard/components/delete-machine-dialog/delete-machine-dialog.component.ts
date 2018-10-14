@@ -17,6 +17,7 @@ export class DeleteMachineDialogComponent implements OnInit {
   ngOnInit() {}
 
   deleteMachine() {
+    console.log(this.data);
     this.machines.deleteMachine(this.data.machine)
       .subscribe(() => {
         this.dialogRef.close();

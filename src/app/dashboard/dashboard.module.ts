@@ -9,6 +9,9 @@ import { FeedbackGuard } from './guards/feedback.guard';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { NewMachineDialogComponent } from './components/new-machine-dialog/new-machine-dialog.component';
 import { DeleteMachineDialogComponent } from './components/delete-machine-dialog/delete-machine-dialog.component';
+import { UploadPhotoDialogComponent } from './components/upload-photo-dialog/upload-photo-dialog.component';
+import { EditMachineDialogComponent } from './components/edit-machine-dialog/edit-machine-dialog.component';
+import { DeleteFeedbackDialogComponent } from './components/delete-feedback-dialog/delete-feedback-dialog.component';
 
 
 @NgModule({
@@ -21,7 +24,10 @@ import { DeleteMachineDialogComponent } from './components/delete-machine-dialog
     MachinesComponent,
     FeedbackComponent,
     NewMachineDialogComponent,
-    DeleteMachineDialogComponent
+    DeleteMachineDialogComponent,
+    UploadPhotoDialogComponent,
+    EditMachineDialogComponent,
+    DeleteFeedbackDialogComponent
   ],
   providers: [
     DashboardGuard,
@@ -30,7 +36,10 @@ import { DeleteMachineDialogComponent } from './components/delete-machine-dialog
   ],
   entryComponents: [
     NewMachineDialogComponent,
-    DeleteMachineDialogComponent
+    DeleteMachineDialogComponent,
+    UploadPhotoDialogComponent,
+    EditMachineDialogComponent,
+    DeleteFeedbackDialogComponent
   ]
 })
 export class DashboardModule {}

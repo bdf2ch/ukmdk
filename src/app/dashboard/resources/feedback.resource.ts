@@ -18,7 +18,7 @@ export class FeedbackResource extends Resource {
   /**
    * Path: /
    * Method: GET
-   * Авторизация пользователя
+   * Получение списка сообщений
    */
   @ResourceAction({
     path: '/',
@@ -26,5 +26,17 @@ export class FeedbackResource extends Resource {
     withCredentials: true
   })
   getList: IResourceMethod<{action: string}, IFeedback[]>;
+
+  /**
+   * Path: /
+   * Method: GET
+   * Удаление сообщения
+   */
+  @ResourceAction({
+    path: '/',
+    method: ResourceRequestMethod.Get,
+    withCredentials: true
+  })
+  deleteMessage: IResourceMethod<{action: string, id: number}, boolean>;
 }
 

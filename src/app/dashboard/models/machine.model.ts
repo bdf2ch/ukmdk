@@ -23,6 +23,22 @@ export class Machine {
     this.photo = config ? config.photo_url : null;
     this.cost = config ? config.cost : null;
     this.rent = config ? config.rent : null;
-    this.isEnabled = config ? Boolean(config.is_enabled) : true;
+    this.isEnabled = config ? (Number(config.is_enabled) === 1 ? true : false) : false;
+  }
+
+  /**
+   * Экспорт модели в DTO
+   */
+  toDTO(): IMachine {
+    const result: IMachine = {
+      id: this.id ? this.id : 0,
+      title: this.title ? this.title : '',
+      description: this.description ? this.description : '',
+      cost: this.cost ? String(this.cost) : '',
+      rent: this.rent ? String(this.rent) : '',
+      photo_url: this.photo ? this.photo : '',
+      is_enabled: 1
+    };
+    return result;
   }
 }

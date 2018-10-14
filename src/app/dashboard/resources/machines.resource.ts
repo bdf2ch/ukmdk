@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { ResourceParams, ResourceHandler, ResourceAction, ResourceRequestMethod, IResourceMethod, Resource } from '@ngx-resource/core';
+import {
+  IResourceMethod,
+  Resource,
+  ResourceAction,
+  ResourceHandler,
+  ResourceParams,
+  ResourceQueryMappingMethod,
+  ResourceRequestMethod
+} from '@ngx-resource/core';
 import { IMachine } from '../interfaces/machine.interface';
 
 @Injectable({
@@ -26,6 +34,30 @@ export class MachinesResource extends Resource {
     withCredentials: true
   })
   getList: IResourceMethod<{action: string}, IMachine[]>;
+
+  /**
+   * Path: /
+   * Method: GET
+   * Добавление спецтранспорта
+   */
+  @ResourceAction({
+    path: '/',
+    method: ResourceRequestMethod.Get,
+    withCredentials: true
+  })
+  addMachine: IResourceMethod<{action: string, machine: IMachine}, IMachine>;
+
+  /**
+   * Path: /
+   * Method: GET
+   * Редактирование спецтранспорта
+   */
+  @ResourceAction({
+    path: '/',
+    method: ResourceRequestMethod.Get,
+    withCredentials: true
+  })
+  editMachine: IResourceMethod<{action: string, id: number, title: string, description: string, cost: string, rent: string, is_enabled: number}, IMachine>;
 
   /**
    * Path: /

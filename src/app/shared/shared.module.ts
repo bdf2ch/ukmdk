@@ -16,6 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatMenuModule,
     MatTableModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSlideToggleModule
   ],
   declarations: [],
   exports: [
@@ -57,7 +59,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatMenuModule,
     MatTableModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSlideToggleModule
   ]
 })
 export class SharedModule { }

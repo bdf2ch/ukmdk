@@ -14,10 +14,13 @@
           <div><strong>Аренда:</strong>&nbsp; {{ machine.rent }}</div>
         </mat-card-content>
         <mat-card-actions class="d-flex justify-content-end">
-          <button mat-icon-button class="mr-2" color="primary" matTooltip="Редактировать" matTooltipPosition="above">
+          <button mat-icon-button class="mr-2" color="primary" matTooltip="Загрузить изображение" matTooltipPosition="above" (click)="openUploadPhotoDialog(machine)">
+            <mat-icon>add_a_photo</mat-icon>
+          </button>
+          <button mat-icon-button class="mr-2" color="primary" matTooltip="Редактировать" matTooltipPosition="above" (click)="openEditMachineDialog(machine)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="primary" matTooltip="Удалить" matTooltipPosition="above" (click)="openDeletemachineDialog(machine)">
+          <button mat-icon-button color="primary" matTooltip="Удалить" matTooltipPosition="above" (click)="openDeleteMachineDialog(machine)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-card-actions>

@@ -16,12 +16,11 @@ export class NewMachineDialogComponent implements OnInit {
 
   constructor(private readonly dialogRef: MatDialogRef<NewMachineDialogComponent>,
               public readonly machines: MachinesService) {
-    this.machine = new Machine();
     this.newMachineForm = new FormGroup({
-      title: new FormControl(this.machine.title, Validators.required),
-      description: new FormControl(this.machine.description),
-      cost: new FormControl(this.machine.cost, Validators.required),
-      rent: new FormControl(this.machine.rent, Validators.required)
+      title: new FormControl(null, Validators.required),
+      description: new FormControl(null),
+      cost: new FormControl(null, Validators.required),
+      rent: new FormControl(null, Validators.required)
     });
     this.photo = null;
   }
@@ -30,7 +29,6 @@ export class NewMachineDialogComponent implements OnInit {
 
   closeNewMachineDialog() {
     this.dialogRef.close();
-    this.machine = new Machine();
     this.newMachineForm.reset();
   }
 
@@ -41,7 +39,16 @@ export class NewMachineDialogComponent implements OnInit {
   }
 
   addMachine() {
-    this.machines.addMachine(this.machine, this.photo)
+    const machine = new Machine({
+      id: 0,
+      title: this.newMachineForm.controls['title'].value,
+      description: this.newMachineForm.controls['description'].value,
+      cost: this.newMachineForm.controls['cost'].value,
+      rent: this.newMachineForm.controls['rent'].value,
+      is_enabled: 1,
+      photo_url: ''
+    });
+    this.machines.addMachine(machine, this.photo)
       .subscribe(() => {
         this.dialogRef.close();
         this.machines.fetchList()

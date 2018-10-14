@@ -24,14 +24,14 @@ export const routes: Routes = [
         path: 'machines',
         component: MachinesComponent,
         resolve: [
-          //MachinesGuard
+          MachinesGuard
         ]
       },
       {
         path: 'feedback',
         component: FeedbackComponent,
         resolve: [
-          //FeedbackGuard
+          FeedbackGuard
         ]
       }
     ]

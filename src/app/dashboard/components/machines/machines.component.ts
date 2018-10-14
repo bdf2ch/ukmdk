@@ -4,6 +4,8 @@ import { NewMachineDialogComponent } from '../new-machine-dialog/new-machine-dia
 import { MachinesService } from '../../services/machines.service';
 import { DeleteMachineDialogComponent } from '../delete-machine-dialog/delete-machine-dialog.component';
 import { Machine } from '../../models/machine.model';
+import { UploadPhotoDialogComponent } from '../upload-photo-dialog/upload-photo-dialog.component';
+import { EditMachineDialogComponent } from '../edit-machine-dialog/edit-machine-dialog.component';
 
 @Component({
   selector: 'app-machines',
@@ -24,8 +26,26 @@ export class MachinesComponent implements OnInit {
     });
   }
 
-  openDeletemachineDialog(machine: Machine) {
+  openDeleteMachineDialog(machine: Machine) {
     this.dialog.open(DeleteMachineDialogComponent, {
+      width: '450px',
+      data: {
+        machine: machine
+      }
+    });
+  }
+
+  openUploadPhotoDialog(machine: Machine) {
+    this.dialog.open(UploadPhotoDialogComponent, {
+      width: '400px',
+      data: {
+        machine: machine
+      }
+    });
+  }
+
+  openEditMachineDialog(machine: Machine) {
+    this.dialog.open(EditMachineDialogComponent, {
       width: '450px',
       data: {
         machine: machine
