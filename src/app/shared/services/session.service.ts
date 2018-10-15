@@ -26,7 +26,7 @@ export class SessionService {
       passwd: 'zx12!@#$',
       is_enabled: 1
     });
-    this.user = new BehaviorSubject<User | null>(user);
+    this.user = new BehaviorSubject<User | null>(null);
     this.authorizationInProgress = new BehaviorSubject<boolean>(false);
   }
 
@@ -54,7 +54,6 @@ export class SessionService {
    * Завршение сессии пользователя
    */
   signOut(): void {
-    this.authorizationInProgress.next(true);
     this.user.next(null);
   }
 
